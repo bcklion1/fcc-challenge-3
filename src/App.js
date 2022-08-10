@@ -6,6 +6,7 @@ import './App.css';
 
 function App() {
   const [display,setDisplay] = useState("")
+  const [power,setPower]= useState(true) //true means on false means off
   return (
     <div class="flex center">
       <div class="machine">
@@ -32,8 +33,9 @@ function Noises(props){
       <button onClick={()=>noisePlayed("Z")} class="drum">Z</button>
       <button onClick={()=>noisePlayed("X")} class="drum">X</button>
       <button onClick={()=>noisePlayed("C")} class="drum">C</button>
+      <audio id="beep" preload="auto" ref={(audio) => {beep = audio;}}src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"/>
     </div>
-
+    
   )
 }
 
