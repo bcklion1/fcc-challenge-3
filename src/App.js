@@ -25,11 +25,11 @@ let CAudio;
 
 function App() {
   const [display,setDisplay] = useState("")
-  const [power,setPower]= useState(false) //true means on false means off
+  const [power,setPower]= useState(true) //true means on false means off
   const [volume, setVolume] = useState(30);
   return (
     <div class="flex center">
-      <div class="machine">
+      <div class="machine" id="drum-machine">
         <div><Noises volume={volume} power={power} setDisplay={setDisplay}/></div>
         <div><Controls setVolume={setVolume} setDisplay={setDisplay} display={display} power={power} setPower={setPower}/></div>
       </div>
@@ -97,24 +97,16 @@ function Noises(props){
   return(
 
     <div class="drum-wrapper">
-      <button onClick={()=>noisePlayed("Q")} class="drum">Q</button>
-      <button onClick={()=>noisePlayed("W")} class="drum">W</button>
-      <button onClick={()=>noisePlayed("E")} class="drum">E</button>
-      <button onClick={()=>noisePlayed("A")} class="drum">A</button>
-      <button onClick={()=>noisePlayed("S")} class="drum">S</button>
-      <button onClick={()=>noisePlayed("D")} class="drum">D</button>
-      <button onClick={()=>noisePlayed("Z")} class="drum">Z</button>
-      <button onClick={()=>noisePlayed("X")} class="drum">X</button>
-      <button onClick={()=>noisePlayed("C")} class="drum">C</button>
-      <audio id="Q" preload="auto" ref={(audio) => {QAudio = audio;}}src={Q.url}/>
-      <audio id="W" preload="auto" ref={(audio) => {WAudio = audio;}}src={W.url}/>
-      <audio id="E" preload="auto" ref={(audio) => {EAudio = audio;}}src={E.url}/>
-      <audio id="A" preload="auto" ref={(audio) => {AAudio = audio;}}src={A.url}/>
-      <audio id="S" preload="auto" ref={(audio) => {SAudio = audio;}}src={S.url}/>
-      <audio id="D" preload="auto" ref={(audio) => {DAudio = audio;}}src={D.url}/>
-      <audio id="Z" preload="auto" ref={(audio) => {ZAudio = audio;}}src={Z.url}/>
-      <audio id="X" preload="auto" ref={(audio) => {XAudio = audio;}}src={X.url}/>
-      <audio id="C" preload="auto" ref={(audio) => {CAudio = audio;}}src={C.url}/>
+      <button onClick={()=>noisePlayed("Q")} class="drum-pad" id="Q"><audio class="clip" id="Q" preload="auto" ref={(audio) => {QAudio = audio;}}src={Q.url}/>Q</button>
+      <button onClick={()=>noisePlayed("W")} class="drum-pad" id="W"><audio class="clip" id="W" preload="auto" ref={(audio) => {WAudio = audio;}}src={W.url}/>W</button>
+      <button onClick={()=>noisePlayed("E")} class="drum-pad" id="Q"><audio class="clip" id="E" preload="auto" ref={(audio) => {EAudio = audio;}}src={E.url}/>E</button>
+      <button onClick={()=>noisePlayed("A")} class="drum-pad" id="Q"><audio class="clip" id="A" preload="auto" ref={(audio) => {AAudio = audio;}}src={A.url}/>A</button>
+      <button onClick={()=>noisePlayed("S")} class="drum-pad" id="Q"><audio class="clip" id="S" preload="auto" ref={(audio) => {SAudio = audio;}}src={S.url}/>S</button>
+      <button onClick={()=>noisePlayed("D")} class="drum-pad" id="Q"><audio class="clip" id="D" preload="auto" ref={(audio) => {DAudio = audio;}}src={D.url}/>D</button>
+      <button onClick={()=>noisePlayed("Z")} class="drum-pad" id="Q"><audio class="clip" id="Z" preload="auto" ref={(audio) => {ZAudio = audio;}}src={Z.url}/>Z</button>
+      <button onClick={()=>noisePlayed("X")} class="drum-pad" id="Q"><audio class="clip" id="X" preload="auto" ref={(audio) => {XAudio = audio;}}src={X.url}/>X</button>
+      <button onClick={()=>noisePlayed("C")} class="drum-pad" id="Q"><audio class="clip" id="C" preload="auto" ref={(audio) => {CAudio = audio;}}src={C.url}/>C</button>
+      
     </div>
     
   )
@@ -129,7 +121,7 @@ function Controls(props){
       <p className="vol">Power</p>
       <ToggleSwitch label="Volume" power={props.power} setPower={props.setPower} setDisplay={props.setDisplay}/>  
       </div>
-      <div class="screen">{props.display}</div>
+      <div class="screen" id="display">{props.display}</div>
       <div class="slider">
         <Slider progress defaultValue={30} onChange={(value)=>props.setVolume(value)} />
       </div>
@@ -155,7 +147,7 @@ const ToggleSwitch = ({ label,power,setPower,setDisplay }) => {
 
       <div className="toggle-switch">
         <input type="checkbox" className="checkbox" 
-               name={label} id={label} onChange={()=>powerChange()}/>
+               name={label} id={label} onChange={()=>powerChange()} checked/>
         <label className="label" htmlFor={label}>
           <span className="inner" />
           <span className="switch" />
